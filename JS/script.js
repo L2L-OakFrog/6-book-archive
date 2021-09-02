@@ -3,6 +3,7 @@ const searchField = document.getElementById('search-field'); // Search Bar
 const searchButton = document.getElementById('search-btn'); // Search Button
 const searchResults = document.getElementById('search-list'); // Search Results as columns
 const errors = document.getElementById('error'); // Search Results as columns
+const spinning = document.getElementById('spinner'); // Search Results as columns
 
 // Variables
 
@@ -21,7 +22,7 @@ searchButton.addEventListener
 // spinner
 let showSpinner = styles =>
 {
-    document.getElementById('spinner').style.display = styles;
+    spinning.style.display = styles;
 }
 // Books URL
 const bookList = (searchText) => 
@@ -33,7 +34,7 @@ const bookList = (searchText) =>
         {
             if (data.q === "")
             {
-                error.innerText = "Please type something";
+                errors.innerText = "Please type something";
             }
             else if (data.numFound === 0)
             {
@@ -41,7 +42,7 @@ const bookList = (searchText) =>
             }
             else
             {
-                error.innerText = "";
+                errors.innerText = "";
             }
             const results = data.docs;
             bookFormat(results);
@@ -56,7 +57,7 @@ const bookFormat = (result) =>
         const div = document.createElement('div');
         div.classList.add('col-md-2');
         div.innerHTML = `
-        <div class= "container height: 200px ">
+        <div class= "container mb-4">
         <div class="w-100">
           <img src="https://covers.openlibrary.org/b/id/${item.cover_i}-M.jpg" class="w-100" alt="">
         </div>
@@ -73,12 +74,4 @@ const bookFormat = (result) =>
     });
     showSpinner('none');
 }
-
-// cover URL
-const coverLinks = (coverID) => 
-{
-    const coverURL = `https://covers.openlibrary.org/b/id/554106-M.jpg`
-    fetch(coverURL)
-    .then((res) => res.json())
-    .then((data) => console.log(data))
-}
+// Search Results
