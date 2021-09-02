@@ -14,8 +14,15 @@ searchButton.addEventListener
         //searchField.value = '';
         searchResults.textContent = '';
         bookList(searched);
+        showSpinner('block');
     }
 )
+
+// spinner
+let showSpinner = styles =>
+{
+    document.getElementById('spinner').style.display = styles;
+}
 // Books URL
 const bookList = (searchText) => 
 {
@@ -36,7 +43,6 @@ const bookList = (searchText) =>
             {
                 error.innerText = "";
             }
-
             const results = data.docs;
             bookFormat(results);
         });
@@ -63,7 +69,9 @@ const bookFormat = (result) =>
         </div>
         `
         searchResults.appendChild(div);
+        
     });
+    showSpinner('none');
 }
 
 // cover URL
