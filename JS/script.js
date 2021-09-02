@@ -60,14 +60,14 @@ const bookFormat = (result) =>
         const div = document.createElement('div');
         div.classList.add('col-md-2');
         div.innerHTML = `
-        <div class= "container mb-4">
+        <div class= "card mb-4 border rounded border-secondary shadow-sm"">
         <div class="w-100">
           <img src="https://covers.openlibrary.org/b/id/${item.cover_i}-M.jpg" class="w-100" alt="">
         </div>
-        <div class="py-2 d-flex justify-content-between align-items-center d-md-block text-md-center">
+        <div class="card-body py-2 d-flex justify-content-between align-items-center d-md-block text-md-center">
           <h2 class="text-wrap text-break">${item.title}</h2>
-          <p> Author: ${item.author_name}</p>
-          <p class="text-wrap">Published in: ${item.first_publish_year}</p>
+          <p> <span class="fst-italic">Author:</span> ${item.author_name}</p>
+          <p class="text-wrap"><span class="fst-italic">Published in:</span> ${item.first_publish_year}</p>
           <button id="detailbtn" onclick="bookDetails(${item.key})" class="btn btn-dark">Details</button>
         </div>
         </div>
@@ -77,9 +77,3 @@ const bookFormat = (result) =>
     showSpinner('none');
 }
 // Search Results
-
-/* // Details button
-detailBtn.addEventListener('click', () => 
-{
-    console.log('s');
-}) */
