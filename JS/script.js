@@ -2,9 +2,10 @@
 const searchField = document.getElementById('search-field'); // Search Bar
 const searchButton = document.getElementById('search-btn'); // Search Button
 const searchResults = document.getElementById('search-list'); // Search Results as columns
-const errors = document.getElementById('error'); // Search Results as columns
-const spinning = document.getElementById('spinner'); // Search Results as columns
-
+const totalResults = document.getElementById('total'); // Total Results
+const errors = document.getElementById('error'); // Search errors
+const spinning = document.getElementById('spinner'); // spinner
+const detailBtn = document.getElementById('detailbtn'); // detail btn
 // Variables
 
 // Search Field
@@ -17,7 +18,7 @@ searchButton.addEventListener
         bookList(searched);
         showSpinner('block');
     }
-)
+) 
 
 // spinner
 let showSpinner = styles =>
@@ -45,7 +46,8 @@ const bookList = (searchText) =>
                 errors.innerText = "";
             }
             const results = data.docs;
-            bookFormat(results);
+            totalResults.innerText = data.numFound;
+            bookFormat(results); // results
         });
 }
 // Search Field
@@ -53,6 +55,7 @@ const bookList = (searchText) =>
 // Search Results
 const bookFormat = (result) =>
 {
+    // totalResults.innerText = result.length;
     result.slice(0, 20).forEach(item =>{
         const div = document.createElement('div');
         div.classList.add('col-md-2');
@@ -62,16 +65,21 @@ const bookFormat = (result) =>
           <img src="https://covers.openlibrary.org/b/id/${item.cover_i}-M.jpg" class="w-100" alt="">
         </div>
         <div class="py-2 d-flex justify-content-between align-items-center d-md-block text-md-center">
-          <h2 class="text-wrap">${item.title}</h2>
+          <h2 class="text-wrap text-break">${item.title}</h2>
           <p> Author: ${item.author_name}</p>
           <p class="text-wrap">Published in: ${item.first_publish_year}</p>
-          <button onclick="" class="btn btn-dark">Details</button>
+          <button id="detailbtn" onclick="bookDetails(${item.key})" class="btn btn-dark">Details</button>
         </div>
         </div>
         `
         searchResults.appendChild(div);
-        
     });
     showSpinner('none');
 }
 // Search Results
+
+/* // Details button
+detailBtn.addEventListener('click', () => 
+{
+    console.log('s');
+}) */
