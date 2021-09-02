@@ -2,6 +2,8 @@
 const searchField = document.getElementById('search-field'); // Search Bar
 const searchButton = document.getElementById('search-btn'); // Search Button
 const searchResults = document.getElementById('search-list'); // Search Results as columns
+const errors = document.getElementById('error'); // Search Results as columns
+
 // Variables
 
 // Search Field
@@ -9,6 +11,12 @@ searchButton.addEventListener
 ('click', () =>
     {
         const searched = searchField.value;
+        if (searched === "")
+        {
+            errors.innerText = "Please type something"
+        }
+        //searchField.value = '';
+        searchResults.textContent = '';
         bookList(searched);
     }
 )
@@ -20,6 +28,15 @@ const bookList = (searchText) =>
         .then((res) => res.json())
         .then((data) => 
         {
+            if (data.numFound === 0)
+            {
+                error.innerText = "No Books Found";
+            }
+            else
+            {
+                error.innerText = "";
+            }
+
             const results = data.docs;
             bookFormat(results);
         });
@@ -29,18 +46,18 @@ const bookList = (searchText) =>
 // Search Results
 const bookFormat = (result) =>
 {
-    result.forEach(item =>{
+    result.slice(0, 20).forEach(item =>{
         const div = document.createElement('div');
         div.classList.add('col-md-2');
         div.innerHTML = `
-        <div class="">
+        <div class="w-auto">
           <img src="https://covers.openlibrary.org/b/id/${item.id_librarything}-L.jpg" class="w-100" alt="">
         </div>
         <div class="py-2 d-flex justify-content-between align-items-center d-md-block text-md-center">
-          <h1>${item.title}</h1>
-          <p>${item.author_name}</p>
-          <p class="text-wrap">${item.publish_date}</p>
-          <button onclick="showDetails('$')" class="btn btn-dark">Details</button>
+          <h2>${item.title}</h2>
+          <p> Author: ${item.author_name}</p>
+          <p class="text-wrap">Published in: ${item.first_publish_year}</p>
+          <button onclick="" class="btn btn-dark">Details</button>
         </div>
         `
         searchResults.appendChild(div);
