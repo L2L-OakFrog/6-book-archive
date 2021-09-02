@@ -8,10 +8,35 @@
     <title>Assignment-6</title>
     <!-- Vanilla CSS -->
     <link rel="stylesheet" href="/CSS/style.css">
+    <!-- BootStrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 </head>
 
 <body>
-
+    <!-- Input -->
+    <header>
+        <section class="container mt-5">
+            <!-- Headings -->
+            <h1 class="text-center">Search Your Books</h1>
+            <!-- Search Field -->
+            <div class="container-fluid  w-50">
+                <form class="d-flex">
+                    <input id="search-field" class="form-control me-2" type="search" placeholder="Type Book Name"
+                        aria-label="Search">
+                    <button id="search-btn" class="btn btn-info" type="button">Search</button>
+                </form>
+            </div>
+            <!-- Search Field -->
+        </section>
+    </header>
+    <!-- Books -->
+    <section>
+        <div class="container mt-5">
+            <div id="search-list" class="row">
+            </div>
+        </div>
+    </section>
     <!-- Vanilla JS -->
     <script src="/JS/script.js"></script>
 </body>
