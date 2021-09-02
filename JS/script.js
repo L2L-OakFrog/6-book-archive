@@ -11,10 +11,6 @@ searchButton.addEventListener
 ('click', () =>
     {
         const searched = searchField.value;
-        if (searched === "")
-        {
-            errors.innerText = "Please type something"
-        }
         //searchField.value = '';
         searchResults.textContent = '';
         bookList(searched);
@@ -28,9 +24,13 @@ const bookList = (searchText) =>
         .then((res) => res.json())
         .then((data) => 
         {
-            if (data.numFound === 0)
+            if (data.q === "")
             {
-                error.innerText = "No Books Found";
+                error.innerText = "Please type something";
+            }
+            else if (data.numFound === 0)
+            {
+                errors.innerText = "No Books Found"
             }
             else
             {
@@ -50,14 +50,16 @@ const bookFormat = (result) =>
         const div = document.createElement('div');
         div.classList.add('col-md-2');
         div.innerHTML = `
-        <div class="w-auto">
-          <img src="https://covers.openlibrary.org/b/id/${item.id_librarything}-L.jpg" class="w-100" alt="">
+        <div class= "container height: 200px ">
+        <div class="w-100">
+          <img src="https://covers.openlibrary.org/b/id/${item.cover_i}-M.jpg" class="w-100" alt="">
         </div>
         <div class="py-2 d-flex justify-content-between align-items-center d-md-block text-md-center">
-          <h2>${item.title}</h2>
+          <h2 class="text-wrap">${item.title}</h2>
           <p> Author: ${item.author_name}</p>
           <p class="text-wrap">Published in: ${item.first_publish_year}</p>
           <button onclick="" class="btn btn-dark">Details</button>
+        </div>
         </div>
         `
         searchResults.appendChild(div);

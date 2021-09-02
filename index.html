@@ -18,14 +18,18 @@
     <header>
         <section class="container mt-5">
             <!-- Headings -->
-            <h1 class="text-center">Search Your Books</h1>
+            <h1 class="text-center">Search Any Books</h1>
             <!-- Search Field -->
             <div class="container-fluid  w-50">
                 <form class="d-flex">
-                    <input id="search-field" class="form-control me-2" type="search" placeholder="Type Book Name"
+                    <input id="search-field" class="form-control me-2" type="search" placeholder="Type Any Book Name"
                         aria-label="Search">
                     <button id="search-btn" class="btn btn-info" type="button">Search</button>
                 </form>
+            </div>
+            <div id="spinner" class="d-flex align-items-center justify-content-center mt-5">
+                <div><strong>Loading...</strong></div>
+                <div class="spinner-border ms-5" role="status" aria-hidden="true"></div>
             </div>
             <!-- Search Field -->
         </section>
@@ -33,7 +37,6 @@
     <!-- Books -->
     <section>
         <div id="error" class="mt-4 text-center">
-
         </div>
         <div class="container mt-5">
             <div id="search-list" class="row">
